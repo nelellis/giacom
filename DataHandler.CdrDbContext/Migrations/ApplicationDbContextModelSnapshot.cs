@@ -65,6 +65,27 @@ namespace DataHandler.CdrDbContext.Migrations
 
                     b.HasKey("Reference");
 
+                    b.HasIndex("CallDate")
+                        .HasDatabaseName("Idx_call_detail_record_call_date");
+
+                    b.HasIndex("CallerId")
+                        .HasDatabaseName("Idx_call_detail_record_callerId");
+
+                    b.HasIndex("Cost")
+                        .HasDatabaseName("Idx_call_detail_record_cost");
+
+                    b.HasIndex("Duration")
+                        .HasDatabaseName("Idx_call_detail_record_duration");
+
+                    b.HasIndex("Recipient")
+                        .HasDatabaseName("Idx_call_detail_record_recipient");
+
+                    b.HasIndex("CallerId", "Recipient", "CallDate")
+                        .HasDatabaseName("Idx_call_detail_record_caller_reci_date");
+
+                    b.HasIndex("CallerId", "Recipient", "CallDate", "Duration")
+                        .HasDatabaseName("Idx_call_detail_record_caller_reci_date_du");
+
                     b.ToTable("call_detail_record", (string)null);
                 });
 #pragma warning restore 612, 618

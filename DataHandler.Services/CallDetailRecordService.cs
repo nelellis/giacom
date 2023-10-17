@@ -15,6 +15,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using DataHandler.Repositories;
 using System.ComponentModel.DataAnnotations;
+using DataHandler.ViewModels;
+using DataHandler.ViewModels.History;
 
 namespace DataHandler.Services
 {
@@ -23,8 +25,10 @@ namespace DataHandler.Services
         Task<string> ImportFile(string filePath);
 
         Task<string> ImportFile(StreamReader fileStream);
+        Task<IList<CallDetailRecordDto>> RecipientHistory(string recipient, RecipientHistoryRequest request);
+        Task<IList<CallDetailRecordDto>> CallerHistory(string callerId, CallerHistoryRequest request);
     }
-    public class CallDetailRecordService: ICallDetailRecordService
+    public class CallDetailRecordService: FilterServiceBase, ICallDetailRecordService
     {
         
         private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
@@ -33,7 +37,7 @@ namespace DataHandler.Services
         public CallDetailRecordService(IDbContextFactory<ApplicationDbContext> dbContextFactory, 
             ILogger<CallDetailRecordService> logger,
             ICallDetailRecordRepository callDetailRecordRepo
-            )
+            ): base(callDetailRecordRepo)
         {
             _dbContextFactory = dbContextFactory;
             _logger = logger;
@@ -95,6 +99,46 @@ namespace DataHandler.Services
             });
             _logger.LogTrace($"Imported Records");
             return $"{validRecords.Count} records are imported and {invalidRecords.Count} records are ignored.";
+        }
+
+
+        public async Task<IList<CallDetailRecordDto>> RecipientHistory(string recipient, RecipientHistoryRequest request)
+        {
+            var query = _callDetailRecordRepo.GetQueriable().Where(q => q.Recipient == recipient);
+            query = ApplyDateFilter(query, request);
+            query = PaginatedQuery(query, request);
+            return await query
+                .Select(c => new CallDetailRecordDto
+                {
+                    CallDate = c.CallDate,
+                    CallerId = c.CallerId,
+                    Cost = c.Cost,
+                    Currency = c.Currency,
+                    Duration = c.Duration,
+                    EndTime = c.EndTime,
+                    Recipient = c.Recipient,
+                    Reference = c.Reference
+                }).ToListAsync();
+        }
+
+
+        public async Task<IList<CallDetailRecordDto>> CallerHistory(string callerId, CallerHistoryRequest request)
+        {
+            var query = _callDetailRecordRepo.GetQueriable().Where(q => q.CallerId == callerId);
+            query = ApplyDateFilter(query, request);
+            query = PaginatedQuery(query, request);
+            return await query
+                .Select(c => new CallDetailRecordDto
+                {
+                    CallDate = c.CallDate,
+                    CallerId = c.CallerId,
+                    Cost = c.Cost,
+                    Currency = c.Currency,
+                    Duration = c.Duration,
+                    EndTime = c.EndTime,
+                    Recipient = c.Recipient,
+                    Reference = c.Reference
+                }).ToListAsync();
         }
 
         private async Task ValidateCallRecord(CallDetailRecord item, CallDetailRecordValidator validator, List<CallDetailRecord> validRecords, List<CallDetailRecord> inValidRecords)

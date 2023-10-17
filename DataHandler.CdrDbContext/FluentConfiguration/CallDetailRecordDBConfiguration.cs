@@ -31,6 +31,14 @@ namespace DataHandler.CdrDbContext.FluentConfiguration
             builder.Property(e => e.Reference).HasColumnName("reference").IsRequired();            
             builder.Property(e => e.Currency).HasColumnName("currency").IsRequired().HasMaxLength(3);
 
+            builder.HasIndex(e => e.CallerId).HasDatabaseName("Idx_call_detail_record_callerId");
+            builder.HasIndex(e => e.Recipient).HasDatabaseName("Idx_call_detail_record_recipient");
+            builder.HasIndex(e => e.CallDate).HasDatabaseName("Idx_call_detail_record_call_date");
+            builder.HasIndex(e => e.Duration).HasDatabaseName("Idx_call_detail_record_duration");
+            builder.HasIndex(e => e.Cost).HasDatabaseName("Idx_call_detail_record_cost");
+            builder.HasIndex(e => new { e.CallerId, e.Recipient, e.CallDate }).HasDatabaseName("Idx_call_detail_record_caller_reci_date");
+
+            builder.HasIndex(e => new { e.CallerId, e.Recipient, e.CallDate, e.Duration }).HasDatabaseName("Idx_call_detail_record_caller_reci_date_du");
             //builder.HasIndex(e => e.Reference).IsUnique();
         }
     }
