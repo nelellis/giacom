@@ -1,3 +1,4 @@
+using DataHandler.API.ErrorHandling;
 using DataHandler.CdrDbContext;
 using DataHandler.Repositories;
 using DataHandler.Services;
@@ -24,6 +25,9 @@ builder.Services.AddScoped<ICallDetailRecordRepository, CallDetailRecordReposito
 #endregion Service Dependencies
 
 var app = builder.Build();
+
+
+app.AddGlobalErrorHandler();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
