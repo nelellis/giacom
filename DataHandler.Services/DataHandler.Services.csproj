@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -16,6 +16,7 @@
     <ProjectReference Include="..\DataHandler.CsvMapper\DataHandler.CsvMapper.csproj" />
     <ProjectReference Include="..\DataHandler.Repositories\DataHandler.Repositories.csproj" />
     <ProjectReference Include="..\DataHandler.Validators\DataHandler.Validators.csproj" />
+    <ProjectReference Include="..\DataHandler.ViewModels\DataHandler.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

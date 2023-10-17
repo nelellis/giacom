@@ -17,11 +17,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataHandler.Validators", "D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataHandler.API.Test", "DataHandler.API.Test\DataHandler.API.Test.csproj", "{7329D5FE-1F69-433B-A551-CFD4F277D945}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandler.Repositories", "DataHandler.Repositories\DataHandler.Repositories.csproj", "{F7482C6B-12B1-4C8E-9ADE-186D940BB280}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataHandler.Repositories", "DataHandler.Repositories\DataHandler.Repositories.csproj", "{F7482C6B-12B1-4C8E-9ADE-186D940BB280}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandler.Services.Tests", "DataHandler.Services.Tests\DataHandler.Services.Tests.csproj", "{3AE8C834-19DF-4AC0-A53F-3F785C39AB7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataHandler.Services.Tests", "DataHandler.Services.Tests\DataHandler.Services.Tests.csproj", "{3AE8C834-19DF-4AC0-A53F-3F785C39AB7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHelper.Validators.Tests", "DataHelper.Validators.Tests\DataHelper.Validators.Tests.csproj", "{AF30F45D-08CA-4902-8BAB-43C44F1DD13C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataHelper.Validators.Tests", "DataHelper.Validators.Tests\DataHelper.Validators.Tests.csproj", "{AF30F45D-08CA-4902-8BAB-43C44F1DD13C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandler.ViewModels", "DataHandler.ViewModels\DataHandler.ViewModels.csproj", "{4E743E91-90B7-436D-A106-AF24B2859330}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{AF30F45D-08CA-4902-8BAB-43C44F1DD13C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF30F45D-08CA-4902-8BAB-43C44F1DD13C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF30F45D-08CA-4902-8BAB-43C44F1DD13C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E743E91-90B7-436D-A106-AF24B2859330}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E743E91-90B7-436D-A106-AF24B2859330}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E743E91-90B7-436D-A106-AF24B2859330}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E743E91-90B7-436D-A106-AF24B2859330}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

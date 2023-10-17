@@ -19,6 +19,7 @@ SetDBContext(builder);
 #region Service Dependencies
 builder.Services.AddScoped<ICallDetailRecordService, CallDetailRecordService>();
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IStatsService, StatsService>();
 builder.Services.AddScoped<ICallDetailRecordRepository, CallDetailRecordRepository>();
 #endregion Service Dependencies
 
@@ -42,11 +43,10 @@ app.Run();
 static void SetDBContext(WebApplicationBuilder builder)
 {
     var mysqlConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-    //builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
-    //{
-        
-    //    options.UseLazyLoadingProxies().UseMySql(mysqlConnectionString, ServerVersion.AutoDetect(mysqlConnectionString));
-    //});
+    builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
+    {
+        options.UseLazyLoadingProxies().UseMySql(mysqlConnectionString, ServerVersion.AutoDetect(mysqlConnectionString));
+    });
     builder.Services.AddDbContextFactory<ApplicationDbContext>(options =>    {
 
         options.UseLazyLoadingProxies().UseMySql(mysqlConnectionString, ServerVersion.AutoDetect(mysqlConnectionString));
